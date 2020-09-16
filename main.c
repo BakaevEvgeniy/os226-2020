@@ -24,16 +24,16 @@ void parse(int argc, char* argv[], char* input)
 {
 	char* nextCommand;
 	char* nextWord;
-	char* parsedInput = strtok_s(input, ";\n", &nextCommand);
+	char* parsedInput = strtok_r(input, ";\n", &nextCommand);
 	while (parsedInput != NULL)
 	{
-		char* words = strtok_s(parsedInput, " ", &nextWord);
+		char* words = strtok_r(parsedInput, " ", &nextWord);
 		argc = 0;
 		while (words != NULL)
 		{
 			argv[argc] = words;
 			argc++;
-			words = strtok_s(NULL, " ", &nextWord);
+			words = strtok_r(NULL, " ", &nextWord);
 		}
 
 		if (strcmp(argv[0], "echo") == 0)
@@ -43,7 +43,7 @@ void parse(int argc, char* argv[], char* input)
 		else
 			printf("Unknown command.\n");
 
-		parsedInput = strtok_s(NULL, ";\n", &nextCommand);
+		parsedInput = strtok_r(NULL, ";\n", &nextCommand);
 	}
 }
 
